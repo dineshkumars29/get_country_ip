@@ -1,0 +1,2 @@
+extensions:
+  - get_country_ip: true
