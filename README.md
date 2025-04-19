@@ -54,7 +54,7 @@ void fetchLocation() async {
   "timezone": "Asia/Kolkata",
   "isp": "Bharti Airtel",
   "org": "Bharti Airtel Ltd.",
-  "as": "AS45609 Bharti Airtel Ltd.",
+  "as": "Bharti Airtel Ltd.",
   "query": "1.1.1.1"
 }
 
@@ -80,26 +80,31 @@ This package uses Dart's compute function to offload heavy network work from the
 
 get_country_ip/
   example/
-    get_country_ip.dart
+    lib/
+      main.dart
 
 ```
 
 ## ✨ Features
 
 ✅ Get public IP address
+
 ✅ Lookup geolocation details using the IP
+
 ✅ Runs network logic in a background isolate using compute
+
 ✅ Lightweight and easy to integrate
+
 ✅ Ideal for geo-based customization, analytics, and debugging tools
 
 ## Getting started
 This package uses Dart's compute() to perform background work, ensuring your app UI stays smooth and responsive even during network-heavy operations. It's designed to be plug-and-play for developers looking to:
 
-      Personalize content based on user location
+*  Personalize content based on user location
 
-      Perform light IP-based analytics
+*  Perform light IP-based analytics
 
-      Add geolocation-based logging or debugging
+*  Add geolocation-based logging or debugging
 
 ## 💡 Additional information
 This package leverages background processing and external APIs to gather accurate data without slowing down the app. Whether you're building a feature-rich application or a lightweight utility, integrating IP geolocation using get_country_ip provides flexibility and performance.
