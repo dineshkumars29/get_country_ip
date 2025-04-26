@@ -1,6 +1,6 @@
 name: get_country_ip
 description: "user's public IP and geolocation info using isolates for smooth performance."
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/dineshkumars29/get_country_ip
 repository: https://github.com/dineshkumars29/get_country_ip
 issue_tracker: https://github.com/dineshkumars29/get_country_ip/issues
