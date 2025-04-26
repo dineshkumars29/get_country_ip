@@ -2,9 +2,17 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
-/// This function performs a lookup to fetch geolocation info from an IP address.
-/// It uses [compute] to run in an isolate for performance.
-/// Tries `ip-api.com` first, and falls back to `iplocation.net` if needed.
+/// Fetches geolocation information based on the given IP address.
+///
+/// This function attempts to retrieve location details first from [ip-api.com],
+/// and if unsuccessful, falls back to [iplocation.net].
+///
+/// It is designed to run in an isolate using [compute] for better performance
+/// on resource-constrained devices.
+///
+/// Returns a [Map] containing location data if successful, or `null` if both
+/// services fail.
+
 Future<Map<String, dynamic>?> locationLookupWorker(String ip) async {
   try {
     // Attempt 1: Using ip-api.com to get location details for the IP

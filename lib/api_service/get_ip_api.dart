@@ -2,9 +2,14 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
-/// Retrieves the user's public IP address using two online services.
-/// First tries [ipify.org], then falls back to [icanhazip.com] if needed.
-/// The request will timeout after [timeout] duration (default is 5 seconds).
+/// Retrieves the user's public IP address using online services.
+///
+/// Attempts to fetch the public IP address first from [ipify.org] (JSON response),
+/// and if that fails, falls back to [icanhazip.com] (plain text response).
+///
+/// The [timeout] parameter controls how long each request waits before failing.
+/// Returns the IP address as a [String], or `null` if both services fail.
+
 Future<String?> getPublicIP({
   Duration timeout = const Duration(seconds: 5),
 }) async {
@@ -34,9 +39,8 @@ Future<String?> getPublicIP({
 
   // Fallback: Use icanhazip.com (returns plain text IP)
   try {
-    final response = await http
-        .get(Uri.parse('https://icanhazip.com'))
-        .timeout(timeout);
+    final response =
+        await http.get(Uri.parse('https://icanhazip.com')).timeout(timeout);
 
     if (response.statusCode == 200) {
       ip = response.body.trim(); // Trim newline or extra spaces

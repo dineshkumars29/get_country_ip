@@ -1,21 +1,52 @@
-// This class represents the details of an IP address, including location and ISP info.
+/// Represents detailed information about an IP address, including location and ISP.
+///
+/// The [IPDetails] class is used to parse and hold information retrieved from
+/// geolocation APIs such as [ip-api.com] and [iplocation.net]. It includes
+/// details like country, city, ISP, latitude, longitude, and more.
 class IPDetails {
-  final String status; // API response status (e.g., "success", "fail")
-  final String country; // Country name
-  final String countryCode; // Country code (e.g., "IN")
-  final String region; // Region code
-  final String regionName; // Full region name (e.g., "Tamil Nadu")
-  final String city; // City name
-  final String zip; // Postal/ZIP code
-  final String lat; // Latitude (as string)
-  final String lon; // Longitude (as string)
-  final String timezone; // Timezone of the location
-  final String isp; // Internet service provider
-  final String org; // Organization name (could be same as ISP)
-  final String asInfo; // AS (Autonomous System) info
-  final String query; // The queried IP address
+  /// API response status (e.g., "success" or "fail").
+  final String status;
 
-  // Constructor for initializing all fields
+  /// Country name (e.g., "India").
+  final String country;
+
+  /// ISO country code (e.g., "IN").
+  final String countryCode;
+
+  /// Region code (e.g., "TN" for Tamil Nadu).
+  final String region;
+
+  /// Full region/state name (e.g., "Tamil Nadu").
+  final String regionName;
+
+  /// City name.
+  final String city;
+
+  /// Postal or ZIP code.
+  final String zip;
+
+  /// Latitude coordinate (as a string).
+  final String lat;
+
+  /// Longitude coordinate (as a string).
+  final String lon;
+
+  /// Timezone identifier (e.g., "Asia/Kolkata").
+  final String timezone;
+
+  /// Internet Service Provider name.
+  final String isp;
+
+  /// Organization name (could be the same as ISP).
+  final String org;
+
+  /// Autonomous System (AS) information.
+  final String asInfo;
+
+  /// The queried IP address.
+  final String query;
+
+  /// Creates a new [IPDetails] instance with all required fields.
   IPDetails({
     required this.status,
     required this.country,
@@ -33,7 +64,7 @@ class IPDetails {
     required this.query,
   });
 
-  /// Factory constructor to parse JSON from ip-api.com
+  /// Creates an [IPDetails] instance from a JSON response from [ip-api.com].
   factory IPDetails.fromIpApiJson(Map<String, dynamic> json) {
     return IPDetails(
       status: json['status'] as String? ?? 'fail',
@@ -53,14 +84,13 @@ class IPDetails {
     );
   }
 
-  /// Factory constructor to parse fallback JSON from iplocation.net
+  /// Creates an [IPDetails] instance from a fallback JSON response from [iplocation.net].
   factory IPDetails.fromIplocationFallback(Map<String, dynamic> json) {
     return IPDetails(
       status: (json['response_code'] as String?) == '200' ? 'success' : 'fail',
       country: json['country_name'] as String? ?? 'NA',
       countryCode: json['country_code2'] as String? ?? 'NA',
-      region:
-          json['country_code2'] as String? ??
+      region: json['country_code2'] as String? ??
           'NA', // Fallback uses country code as region
       regionName: json['regionName'] as String? ?? 'NA',
       city: json['city'] as String? ?? 'NA',
@@ -75,7 +105,7 @@ class IPDetails {
     );
   }
 
-  // Nicely formatted string output for debugging or logging
+  /// Returns a formatted string representation of the [IPDetails] instance.
   @override
   String toString() {
     return '''
